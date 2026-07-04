@@ -2,15 +2,24 @@ services:
   - type: web
     name: cybershield-backend
     env: python
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+
+    buildCommand: pip install -r requirements.txt
+
+    startCommand: python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+
     envVars:
       - key: DATABASE_PATH
         value: /var/data/cybershield.db
+
+      - key: SECRET_KEY
+        value: cybershield_secret_key
+
       - key: ALLOWED_ORIGINS
         value: http://localhost:5173,http://127.0.0.1:5173
+
       - key: PYTHON_VERSION
         value: 3.12.0
+
     disk:
       name: sqlite-data
       mountPath: /var/data
