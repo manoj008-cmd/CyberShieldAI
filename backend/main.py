@@ -29,25 +29,22 @@ capture_thread = Thread(
     daemon=True
 )
 capture_thread.start()
-
+from fastapi.middleware.cors import CORSMiddleware
 import os
 
-# -----------------------------
-# CORS
-# -----------------------------
-allowed_origins = [
+origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5174",
+    "https://cyber-shield-ai-6pwc.vercel.app"
 ]
-env_origins = os.getenv("ALLOWED_ORIGINS")
-if env_origins:
-    allowed_origins.extend([o.strip() for o in env_origins.split(",") if o.strip()])
+
+extra = os.getenv("ALLOWED_ORIGINS")
+if extra:
+    origins.extend([o.strip() for o in extra.split(",")])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

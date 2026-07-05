@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://cybershieldai-rsrr.onrender.com",
+  baseURL: "https://cybershieldai-2.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
