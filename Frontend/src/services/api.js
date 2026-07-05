@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_URL ||
-    "https://cybershieldai-rsrr.onrender.com",
+  baseURL: "https://cybershieldai-rsrr.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },

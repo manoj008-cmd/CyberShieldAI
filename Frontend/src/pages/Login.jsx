@@ -7,32 +7,46 @@ function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    const token = localStorage.getItem("token");
+
+    if (token) {
       navigate("/dashboard");
     }
   }, [navigate]);
 
   const login = async () => {
     try {
+      setLoading(true);
+
       const res = await api.post("/login", {
         username,
         password,
       });
 
-      if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("username", res.data.username);
-        localStorage.setItem("role", res.data.role);
+      console.log("Login Success:", res.data);
 
-        navigate("/dashboard");
-      } else {
-        alert(res.data.message || "Invalid username or password");
-      }
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("username", res.data.username);
+      localStorage.setItem("role", res.data.role);
+
+      console.log("Token Saved:", localStorage.getItem("token"));
+
+      navigate("/dashboard");
     } catch (err) {
-      console.error(err);
-      alert("Login Failed");
+      console.error("FULL ERROR:", err);
+
+      if (err.response) {
+        console.log("Status:", err.response.status);
+        console.log("Response:", err.response.data);
+        alert(err.response.data.message || "Login Failed");
+      } else {
+        alert(err.message);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,7 +85,6 @@ function Login() {
             marginBottom: "15px",
             borderRadius: "8px",
             border: "1px solid #334155",
-            outline: "none",
             boxSizing: "border-box",
           }}
         />
@@ -87,13 +100,13 @@ function Login() {
             marginBottom: "20px",
             borderRadius: "8px",
             border: "1px solid #334155",
-            outline: "none",
             boxSizing: "border-box",
           }}
         />
 
         <button
           onClick={login}
+          disabled={loading}
           style={{
             width: "100%",
             padding: "12px",
@@ -103,10 +116,9 @@ function Login() {
             borderRadius: "8px",
             cursor: "pointer",
             fontWeight: "bold",
-            fontSize: "16px",
           }}
         >
-          LOGIN
+          {loading ? "Logging in..." : "LOGIN"}
         </button>
       </div>
     </div>
