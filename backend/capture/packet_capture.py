@@ -1,5 +1,6 @@
 from scapy.all import sniff
 from collections import Counter
+import os
 
 packet_stats = Counter({
     "TCP": 0,
@@ -29,7 +30,19 @@ def packet_callback(packet):
 
 def start_capture():
 
-    sniff(
-        prn=packet_callback,
-        store=False
-    )
+    # Skip packet capture on Render
+    if os.getenv("RENDER") == "true":
+        print("Packet capture disabled on Render.")
+        return
+
+    try:
+        sniff(
+            prn=packet_callback,
+            store=False
+        )
+
+    except PermissionError:
+        print("Packet capture permission denied. Running without live capture.")
+
+    except Exception as e:
+        print(f"Packet capture error: {e}")

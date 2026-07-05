@@ -17,9 +17,9 @@ dist/
 dataset/*.pcapng
 dataset/*.pcap
 
-# Large ML files
-model/*.pkl
-model/*.joblib
+# Ignore only large training artifacts
+model/processed_data.pkl
+
 
 # VS Code
 .vscode/
