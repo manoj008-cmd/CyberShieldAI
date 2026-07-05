@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-import Layout from "../components/layout/Layout";
+import Layout from "../components/Layout/Layout";
 import ThemeToggle from "../components/dashboard/ThemeToggle";
 import NotificationPanel from "../components/common/NotificationPanel";
 

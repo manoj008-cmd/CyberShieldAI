@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import Layout from "../components/layout/Layout";
+import Layout from "../components/Layout/Layout";
 import AttackDistribution from "../components/charts/AttackDistribution";
 import AttackHistory from "../components/charts/AttackHistory";
 function Analytics() {
