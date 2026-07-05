@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Layout from "../components/layout/Layout";
+import Layout from "../components/Layout/Layout";
 import api from "../services/api";
 
 function AttackDetails() {
