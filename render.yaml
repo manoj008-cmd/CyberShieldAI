@@ -8,8 +8,8 @@ services:
     startCommand: python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 
     envVars:
-      - key: DATABASE_PATH
-        value: /var/data/cybershield.db
+      -- key: DATABASE_PATH
+        value: /opt/render/project/src/cybershield.db
 
       - key: SECRET_KEY
         value: cybershield_secret_key
@@ -20,7 +20,4 @@ services:
       - key: PYTHON_VERSION
         value: 3.12.0
 
-    disk:
-      name: sqlite-data
-      mountPath: /var/data
-      sizeGB: 1
+    
