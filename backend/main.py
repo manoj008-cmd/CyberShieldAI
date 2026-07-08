@@ -35,7 +35,7 @@ import os
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://cyber-shield-ai-6pwc.vercel.app"
+    "cyber-shield-2fbazk4bx-manoj-kumars-projects-d17c0678.vercel.app"
 ]
 
 extra = os.getenv("ALLOWED_ORIGINS")
